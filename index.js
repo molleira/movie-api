@@ -63,6 +63,12 @@ let topMovies = [
 
   // serve documentation
   app.use(express.static('public'));
+
+  // error-handling middleware function
+  app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+  });
   
   // listen for requests
   app.listen(8080, () => {
