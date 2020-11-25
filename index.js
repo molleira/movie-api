@@ -54,6 +54,9 @@ let topMovies = [
   app.get('/movies', (req, res) => {
     res.json(topMovies);
   });
+
+  // serve documentation
+  app.use(express.static('public'));
   
   // listen for requests
   app.listen(8080, () => {
