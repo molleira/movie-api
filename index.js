@@ -1,5 +1,8 @@
-// import express locally
+// import express and morgan locally
 const express = require('express');
+  morgan = require('morgan');
+
+// define express in a variable
 const app = express();
  
 // list of movies
@@ -46,6 +49,9 @@ let topMovies = [
     }
   ];
   
+  // use morgan to log requests
+  app.use(morgan('common'));
+
   // GET requests
   app.get('/', (req, res) => {
     res.send('Welcome to myFlix!');
