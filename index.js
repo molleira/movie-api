@@ -97,9 +97,10 @@ app.delete('/users/username/movies/title', (req, res) => {
   res.send('The movie was removed from your list');
 });
 
-// deletes user request
+// delete user request
 app.delete('/users/username', (req, res) => {
   res.send('Your account was deleted');
+});
 
 // serve documentation
 app.use(express.static('public'));
