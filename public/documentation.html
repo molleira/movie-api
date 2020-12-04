@@ -36,7 +36,7 @@
         <!-- single movie -->
         <tr>
           <td>Get data about a single movie by name</td>
-          <td>/movies/[Name]</td>
+          <td>/movies/[Title]</td>
           <td>GET</td>
           <td>None</td>
           <td>A JSON object holding data about a single movie, containing name, and classes property. Example:
@@ -94,8 +94,10 @@
               name: “John Doe”;
               classes: {
                 username: xxx;
-                e-mail: xxx;
                 password: xxx;
+                e-mail: xxx;
+                birthday: xxx;
+                fovarites: xxx;
                 }
             }
           </td>
@@ -105,8 +107,10 @@
               name: “John Doe”;
               classes: {
                 username: xxx;
-                e-mail: xxx;
                 password: xxx;
+                e-mail: xxx;
+                birthday: xxx;
+                fovarites: xxx;
                 }
             }
           </td>
@@ -115,17 +119,18 @@
         <!-- update user -->
         <tr>
           <td>Put data about a user</td>
-          <td>/users/[Name]</td>
+          <td>/users/[Username]</td>
           <td>PUT</td>
           <td>A JSON object holding data about the user. Example:
             {
               id: 5;
               name: “John Doe”;
               classes: {
-                username: xxx;
-                e-mail: xxx;
+                uusername: xxx;
                 password: xxx;
-                bio: xxx;
+                e-mail: xxx;
+                birthday: xxx;
+                fovarites: xxx;
                 }
             }</td>
           <td>A JSON object holding data that was updated. Example:
@@ -134,9 +139,10 @@
               name: “John Doe”;
               classes: {
                 username: xxx;
-                e-mail: xxx;
                 password: xxx;
-                bio: xxx;
+                e-mail: xxx;
+                birthday: xxx;
+                fovarites: xxx;
                 }
             }
           </td>
@@ -145,7 +151,7 @@
         <!-- add favorite -->
         <tr>
           <td>Post data about users favorite movies</td>
-          <td>/users/[Name]/movies/[Name]</td>
+          <td>/users/[Username]/movies/[Title]</td>
           <td>POST</td>
           <td>A JSON object holding data about favorite movie. Example:
             {
@@ -164,7 +170,7 @@
         <!-- remove favorite -->
         <tr>
           <td>Delete data about users favorite moviess</td>
-          <td>/users/[Name]/movies/[Name]</td>
+          <td>/users/[Username]/movies/[Title]</td>
           <td>DELETE</td>
           <td>None</td>
           <td>A text message indicating the movie was removed from favorites list</td>
@@ -173,7 +179,7 @@
         <!-- deregister user -->
         <tr>
           <td>Remove a user</td>
-          <td>/users/[Name]</td>
+          <td>/users/[Username]</td>
           <td>DELETE</td>
           <td>None</td>
           <td>A text message indicating wether a user was deregistered from myFlix"</td>
