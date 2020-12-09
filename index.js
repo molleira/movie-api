@@ -10,7 +10,10 @@ const Movies = Models.Movie;
 const Users = Models.User;
  
 // connect mongoose with the database
-mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost:27017/myFlixDB', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
   
 // use morgan to log requests
 app.use(morgan('common'));
@@ -20,9 +23,16 @@ app.get('/', (req, res) => {
   res.send('Welcome to myFlix!');
 });
 
-// get all movies request
+// return a list of all movies to the user
 app.get('/movies', (req, res) => {
-  res.json(topMovies);
+  Movies.find()
+    .then((movies) => {
+      res.status(201).json(movies);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
 
 // get single movie request
