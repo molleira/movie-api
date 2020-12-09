@@ -1,53 +1,16 @@
-// import express and morgan locally
+// import express, morgan, mongoose and models locally
 const express = require('express');
   morgan = require('morgan');
+  mongoose = require('mongoose');
+  Models = require('./models.js');
 
-// define express in a variable
+// define express and models in a variable
 const app = express();
+const Movies = Models.Movie;
+const Users = Models.User;
  
-// list of movies
-let topMovies = [
-    {
-      title: 'The Godfather',
-      director: 'Francis Ford Coppola'
-    },
-    {
-      title: 'The Shawsank Redemption',
-      director: 'Frank Darabont'
-    },
-    {
-      title: 'Schindler\'s List',
-      director: 'Steven Spielberg'
-    },
-    {
-      title: 'Raging Bull',
-      director: 'Martin Scorsese'
-    },
-    {
-      title: 'Casablanca',
-      director: 'Michael Curtiz'
-    },
-    {
-      title: 'Citizen Kane',
-      director: 'Orson Welles'
-    },
-    {
-      title: 'Gone With The Wind',
-      director: 'Victor Fleming'
-    },
-    {
-      title: 'Wizard Of Oz',
-      director: 'Victor Fleming'
-    },
-    {
-      title: 'One Flew Over The Cuckoo\'s Nest',
-      director: 'Milos Forman'
-    },
-    {
-      title: 'Lawrence Of Arabia',
-      director: 'David Lean'
-    }
-  ];
+// connect mongoose with the database
+mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
   
 // use morgan to log requests
 app.use(morgan('common'));
