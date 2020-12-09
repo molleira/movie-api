@@ -35,9 +35,16 @@ app.get('/movies', (req, res) => {
     });
 });
 
-// get single movie request
-app.get('/movies/title', (req, res) => {
-res.json(topMovies.title);
+// return data about a single movie by title
+app.get('/movies/:Title', (req, res) => {
+  Movies.findOne({ Title: req.params.Title })
+    .then((movie) => {
+      res.status(201).json(movie);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
 
 // get genre request
