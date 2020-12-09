@@ -48,10 +48,10 @@ app.get('/movies/:Title', (req, res) => {
 });
 
 // return data about a genre by name
-app.get('/movies/genres/:Name', (req, res) => {
-  Movies.findOne({ "Genre.Name": req.params.Name })
+app.get('/movies/directors/:Name', (req, res) => {
+  Movies.findOne({ "Director.Name": req.params.Name })
   .then((movie) => {
-    res.status(201).json(movie.Genre);
+    res.status(201).json(movie.Director);
   })
   .catch((err) => {
     console.error(err);
@@ -59,9 +59,16 @@ app.get('/movies/genres/:Name', (req, res) => {
   });
 });
 
-// get director request
-app.get('/movies/directors/name', (req, res) => {
-  res.json(topDirectors.name);
+// return data about a director by name
+app.get('/movies/directors/:Name', (req, res) => {
+  Movies.findOne({ "Genre.Name": req.params.Name })
+    .then((movie) => {
+      res.status(201).json(movie.Genre);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
 });
 
 // post new user request
