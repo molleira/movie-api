@@ -147,9 +147,20 @@ app.post('/users/:Username/Movies/:MovieID', (req, res) => {
   });
 });
 
-// delete favorite request
-app.delete('/users/username/movies/title', (req, res) => {
-  res.send('The movie was removed from your list');
+// allow users to remove a movie from their list of favorites
+app.delete('/users/:Username/Movies/:MovieID', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username }, {
+    $pull: { FavoriteMovies: req.params.MovieID }
+  },
+  { new: true },
+  (err, updatedUser) => {
+   if (err) {
+     console.error(err);
+     res.status(500).send('Error: ' + err);
+   } else {
+     res.json(updatedUser);
+   }
+  });
 });
 
 // allow existing users to deregister
