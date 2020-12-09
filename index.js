@@ -98,9 +98,25 @@ app.post('/users', (req, res) => {
     });
 });
 
-// put user update request
-app.put('/users/username', (req, res) => {
-  res.json(userData.username);
+// allow users to update their info
+app.put('/users/:Username', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
+    {
+      Username: req.body.Username,
+      Password: req.body.Password,
+      Email: req.body.Email,
+      Birthday: req.body.Birthday
+    }
+  },
+  { new: true },
+  (err, updatedUser) => {
+    if(err) {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    } else {
+      res.json(updatedUser);
+    }
+  });
 });
 
 // post favorite request
