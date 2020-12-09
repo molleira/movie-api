@@ -35,7 +35,19 @@ app.get('/movies', (req, res) => {
     });
 });
 
-// return data about a single movie by title
+// return a list of all users
+app.get("/users", function (req, res) {
+  Users.find()
+    .then(function (users) {
+      res.status(201).json(users);
+    })
+    .catch(function (err) {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+});
+
+// return data about a single movie by title to the user
 app.get('/movies/:Title', (req, res) => {
   Movies.findOne({ Title: req.params.Title })
     .then((movie) => {
@@ -47,7 +59,7 @@ app.get('/movies/:Title', (req, res) => {
     });
 });
 
-// return data about a genre by name
+// return data about a genre by name to the user
 app.get('/movies/genres/:Name', (req, res) => {
   Movies.findOne({ "Genre.Name": req.params.Name })
   .then((movie) => {
@@ -59,7 +71,7 @@ app.get('/movies/genres/:Name', (req, res) => {
   });
 });
 
-// return data about a director by name
+// return data about a director by name to the user
 app.get('/movies/directors/:Name', (req, res) => {
   Movies.findOne({ "Director.Name": req.params.Name })
     .then((movie) => {
