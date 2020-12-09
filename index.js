@@ -47,10 +47,17 @@ app.get('/movies/:Title', (req, res) => {
     });
 });
 
-// get genre request
-app.get('/movies/genres/title', (req, res) => {
-  res.json(topGenres.title);
- });
+// return data about a genre by name
+app.get('/movies/genres/:Name', (req, res) => {
+  Movies.findOne({ "Genre.Name": req.params.Name })
+  .then((movie) => {
+    res.status(201).json(movie.Genre);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
+});
 
 // get director request
 app.get('/movies/directors/name', (req, res) => {
