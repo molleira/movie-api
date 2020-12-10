@@ -1,5 +1,6 @@
 // import express, morgan, mongoose and models locally
 const express = require('express');
+  bodyParser = require("body-parser");
   morgan = require('morgan');
   mongoose = require('mongoose');
   Models = require('./models.js');
@@ -15,6 +16,9 @@ mongoose.connect('mongodb://localhost:27017/myFlixDB', {
   useUnifiedTopology: true,
 });
   
+// use body parser
+app.use(bodyParser.json());
+
 // use morgan to log requests
 app.use(morgan('common'));
 
@@ -38,10 +42,10 @@ app.get('/movies', (req, res) => {
 // return a list of all users
 app.get("/users", function (req, res) {
   Users.find()
-    .then(function (users) {
+    .then((users) => {
       res.status(201).json(users);
     })
-    .catch(function (err) {
+    .catch((err) => {
       console.error(err);
       res.status(500).send("Error: " + err);
     });
