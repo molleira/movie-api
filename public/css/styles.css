@@ -7,3 +7,11 @@ table, th, td {
     padding: 10px;
     border: 1px solid black;
 }
+
+span {
+    color: red;
+}
+
+.example {
+    text-align: left;
+}

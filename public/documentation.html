@@ -22,167 +22,199 @@
           <th>HTTP Method</th>
           <th>Request body data format</th>
           <th>Response body data format</th>
+          <th>Example</th>
         </tr>
 
         <!-- all movies -->
         <tr>
-          <td>Get a list of movies</td>
+          <td>Return a list of all movies to the user</td>
           <td>/movies</td>
           <td>GET</td>
           <td>None</td>
-          <td>A JSON object holding data about all the movies</td>
+          <td>A JSON object holding data about all the movies.</td>
+          <td>Please, see example below but including all movies.</td>
         </tr>
 
         <!-- single movie -->
         <tr>
-          <td>Get data about a single movie by name</td>
-          <td>/movies/[Title]</td>
+          <td>Return data about a single movie by title to the user</td>
+          <td>/movies/:Title</td>
           <td>GET</td>
           <td>None</td>
-          <td>A JSON object holding data about a single movie, containing name, and classes property. Example:
-            {
-              name: “The Godfather”;
-              classes: {
-                description: xxx;
-                genre: xxx;
-                director: xxx;
-                img URL: xxx;
-                featured: xxx;
-                }
+          <td>A JSON object holding data about a single movie containing title, description, genre, director, image URL and whether it’s featured or not.</td>
+          <td class="example">{ <span>Title:</span> “The Godfather”;<br>
+              <span>Description:</span> "The Godfather is a 1972 American crime film directed by Francis Ford Coppola who co-wrote the screenplay with Mario Puzo, based on Puzo's best-selling 1969 novel of the same name."<br>
+              <span>Genre:</span> {<br>
+                <span>Name:</span> "Drama",<br>
+                <span>Description:</span> "In film and television, drama is a category of narrative fiction (or semi-fiction) intended to be more serious than humorous in tone."<br>
+              },<br>
+              <span>Director:</span> {<br>
+                <span>Name:</span> Francis Ford Coppola,<br>
+                <span>Bio:</span> "Francis Ford Coppola is an American film director, producer and screenwriter. He was a central figure in the New Hollywood filmmaking movement of the 1960s and 1970s, and is widely considered to be one of the greatest filmmakers of all time.",<br>
+                <span>Birth:</span> "1939",<br>
+                <span>Death:</span> "--"<br>
+              },<br>
+              <span>ImagePath:</span> "shorturl.at/uI159",<br>
+              <span>Featured:</span> false 
             }
           </td>
         </tr>
 
         <!-- genres -->
         <tr>
-          <td>Get data about a genre by name</td>
-          <td>/movies/genres/[Name]</td>
+          <td>Return data about a genre by name to the user</td>
+          <td>/movies/genres/:Name</td>
           <td>GET</td>
           <td>None</td>
-          <td>A JSON object holding data about a single genre. Example:
+          <td>A JSON object holding data about a single genre.</td>
+          <td class="example">
             {
-              name: “Drama”;
-              description: xxx;
+              <span>Name:</span> “Drama”,<br>
+              <span>Description:</span> "In film and television, drama is a category of narrative fiction (or semi-fiction) intended to be more serious than humorous in tone." 
             }
+          </td>
         </tr>
 
         <!-- directors -->
         <tr>
-          <td>Get data about a director by name</td>
+          <td>Return data about a director by name to the user</td>
           <td>/movies/directors/[Name]</td>
           <td>GET</td>
           <td>None</td>
-          <td>A JSON object holding data about a director, containing name, and classes property. Example:
+          <td>A JSON object holding data about a director, containing name, and classes property.</td>
+          <td class="example">
             {
-              name: “Francis Ford Coppola”;
-              classes: {
-                bio: xxx;
-                birth year: xxx;
-                death year: xxx;
-                }
+              <span>Director:</span> {<br>
+                <span>Name:</span> Francis Ford Coppola,<br>
+                <span>Bio:</span> "Francis Ford Coppola is an American film director, producer and screenwriter. He was a central figure in the New Hollywood filmmaking movement of the 1960s and 1970s, and is widely considered to be one of the greatest filmmakers of all time.",<br>
+                <span>Birth:</span> "1939",<br>
+                <span>Death:</span> "--" 
+              },
             }
           </td>
         </tr>
 
         <!-- register user -->
         <tr>
-          <td>Add a user</td>
+          <td>Allow new users to register</td>
           <td>/users</td>
           <td>POST</td>
-          <td>A JSON object holding data about the new user. Example:
+          <td>A JSON object holding data about the new user.<br>
             {
-              name: “John Doe”;
-              classes: {
-                username: xxx;
-                password: xxx;
-                e-mail: xxx;
-                birthday: xxx;
-                fovarites: xxx;
-                }
+              Username: xxx,<br>
+              Password: xxx,<br>
+              Email: xxx,<br>
+              Birthday: xxx,<br>
+              FavoriteMovies: xxx
             }
           </td>
-          <td>A JSON object holding data about the new user that was added, containing an ID. Example:
+          <td>A JSON object holding data about the new user that was added, containing an ID.<br>
             {
-              id: 5;
-              name: “John Doe”;
-              classes: {
-                username: xxx;
-                password: xxx;
-                e-mail: xxx;
-                birthday: xxx;
-                fovarites: xxx;
-                }
+              ID: xxx,<br>
+              Username: xxx,<br>
+              Password: xxx,<br>
+              Email: xxx,<br>
+              Birthday: xxx,<br>
+              FavoriteMovies: xxx
+            }
+          </td>
+          <td class="example">
+            {
+              <span>ObjectId:</span> "5fca2963957446a71f1fc6a4",<br>
+              <span>Username:</span> "davidcohen2580",<br>
+              <span>Password:</span> "test123",<br>
+              <span>Email:</span> "davidcohen2580@gmail.com",<br>
+              <span>Birthday:</span> "1988-09-10",<br>
+              <span>FavoriteMovies:</span> [ObjectId("5fca23d3957446a71f1fc6a3"), ObjectId("5fca21bd957446a71f1fc6a1")]
             }
           </td>
         </tr>
 
         <!-- update user -->
         <tr>
-          <td>Put data about a user</td>
-          <td>/users/[Username]</td>
+          <td>Allow users to update their info</td>
+          <td>/users/:Username</td>
           <td>PUT</td>
-          <td>A JSON object holding data about the user. Example:
+          <td>A JSON object holding data about the user.<br>
             {
-              id: 5;
-              name: “John Doe”;
-              classes: {
-                uusername: xxx;
-                password: xxx;
-                e-mail: xxx;
-                birthday: xxx;
-                fovarites: xxx;
-                }
+              Username: xxx,<br>
+              Password: xxx,<br>
+              Email: xxx,<br>
+              Birthday: xxx,<br>
+              FavoriteMovies: xxx
+            }
             }</td>
-          <td>A JSON object holding data that was updated. Example:
+          <td>A JSON object holding data that was updated.<br>
             {
-              id: 5;
-              name: “John Doe”;
-              classes: {
-                username: xxx;
-                password: xxx;
-                e-mail: xxx;
-                birthday: xxx;
-                fovarites: xxx;
-                }
+              ID: xxx,<br>
+              Username: xxx,<br>
+              Password: xxx,<br>
+              Email: xxx,<br>
+              Birthday: xxx,<br>
+              FavoriteMovies: xxx
             }
           </td>
+          <td>Please, see example for registered user above.</td>
         </tr>
 
         <!-- add favorite -->
         <tr>
-          <td>Post data about users favorite movies</td>
-          <td>/users/[Username]/movies/[Title]</td>
+          <td>Allow users to add a movie to their list of favorites</td>
+          <td>/users/:Username/Movies/:MovieID</td>
           <td>POST</td>
-          <td>A JSON object holding data about favorite movie. Example:
+          <td>A JSON object holding data about favorite movie.<br>
             {
-              favoriteMovie: xxx;
-              favoriteMovie: xxx;
+              Username: xxx,<br>
+              FavoriteMovies: xxx
             }
           </td>
-          <td>A JSON object holding data about favorite movie. Example:
+          <td>A JSON object holding data about favorite movie.<br>
             {
-              favoriteMovie: xxx;
-              favoriteMovie: xxx;
+              ID: xxx,<br>
+              Username: xxx,<br>
+              Password: xxx,<br>
+              Email: xxx,<br>
+              Birthday: xxx,<br>
+              FavoriteMovies: xxx
             }
           </td>
+          <td>Please, see example for registered user above.</td>
         </tr>
 
         <!-- remove favorite -->
         <tr>
-          <td>Delete data about users favorite moviess</td>
-          <td>/users/[Username]/movies/[Title]</td>
+          <td>Allow users to remove a movie from their list of favorites</td>
+          <td>/users/:Username/Movies/:MovieID</td>
           <td>DELETE</td>
-          <td>None</td>
-          <td>A text message indicating the movie was removed from favorites list</td>
+          <td>A JSON object holding data about favorite movie.<br>
+            {
+              Username: xxx,<br>
+              FavoriteMovies: xxx
+            }
+          </td>
+          <td>A JSON object holding data about favorite movie.<br>
+            {
+              ID: xxx,<br>
+              Username: xxx,<br>
+              Password: xxx,<br>
+              Email: xxx,<br>
+              Birthday: xxx,<br>
+              FavoriteMovies: xxx
+            }
+          </td>
+          <td>Please, see example for registered user above.</td>
         </tr>
 
         <!-- deregister user -->
         <tr>
-          <td>Remove a user</td>
-          <td>/users/[Username]</td>
+          <td>Allow existing users to deregister</td>
+          <td>/users/:Username</td>
           <td>DELETE</td>
-          <td>None</td>
-          <td>A text message indicating wether a user was deregistered from myFlix"</td>
+          <td>{
+            Username: xxx
+          }</td>
+          <td>A text message indicating wether a user was deregistered."</td>
+          <td>"davidcohen2580 was deleted."</td>
         </tr>
 
       </table>
