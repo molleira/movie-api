@@ -1,6 +1,3 @@
-const { Router } = require('express');
-const passport = require('passport');
-
 // sets token as variable
 const jwtSecret = 'your_jwt_secret';
 
