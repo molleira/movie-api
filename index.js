@@ -1,9 +1,11 @@
-// import express, morgan, mongoose and models locally
+// import express, morgan, mongoose, models and passport locally
 const express = require('express');
   bodyParser = require("body-parser");
   morgan = require('morgan');
   mongoose = require('mongoose');
   Models = require('./models.js');
+  passport = require('passport');
+  require('./passport');
 
 // define express and models in a variable
 const app = express();
@@ -18,6 +20,9 @@ mongoose.connect('mongodb://localhost:27017/myFlixDB', {
   
 // use body parser
 app.use(bodyParser.json());
+
+// requires auth.js
+let auth = require('./auth')(app);
 
 // use morgan to log requests
 app.use(morgan('common'));
