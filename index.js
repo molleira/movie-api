@@ -1,4 +1,4 @@
-// import express, morgan, mongoose, models, passport and cors locally
+// import express, morgan, mongoose, models, passport, cors and validator locally
 const express = require('express');
   bodyParser = require('body-parser');
   morgan = require('morgan');
@@ -7,6 +7,7 @@ const express = require('express');
   passport = require('passport');
   require('./passport');
   cors = require('cors');
+const { check, validationResult } = require('express-validator');
 
 // define express and models in a variable
 const app = express();
@@ -97,7 +98,16 @@ app.get('/movies/directors/:Name', passport.authenticate('jwt', { session: false
 });
 
 // allow new users to register
-app.post('/users', (req, res) => {
+app.post('/users', [
+  check('Username', 'Username is required').isLength({min: 5}),
+  check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+  check('Password', 'Password is required').not().isEmpty(),
+  check('Email', 'Email does not appear to be valid').isEmail()
+], (req, res) => {
+  let errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
   let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({ Username: req.body.Username })
     .then((user) => {
@@ -125,7 +135,16 @@ app.post('/users', (req, res) => {
 });
 
 // allow users to update their info
-app.put('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.put('/users/:Username', passport.authenticate('jwt', { session: false }), [
+  check('Username', 'Username is required').isLength({min: 5}),
+  check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+  check('Password', 'Password is required').not().isEmpty(),
+  check('Email', 'Email does not appear to be valid').isEmail()
+], (req, res) => {
+  let errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
   Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
     {
       Username: req.body.Username,
