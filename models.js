@@ -1,5 +1,6 @@
 // import mongoose locally
 const mongoose = require('mongoose');
+  bcrypt = require('bcrypt');
 
 // movie schema
 let movieSchema = mongoose.Schema({
@@ -27,6 +28,15 @@ let userSchema = mongoose.Schema({
   Birthday: Date,
   FavoriteMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }]
 });
+
+// hash and validate password schemas
+userSchema.statics.hashPassword = (password) => {
+  return bcrypt.hashSync(password, 10);
+};
+
+userSchema.methods.validatePassword = function(password) {
+  return bcrypt.compareSync(password, this.Password);
+};
 
 // create models
 let Movie = mongoose.model('Movie', movieSchema);

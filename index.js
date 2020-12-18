@@ -1,4 +1,4 @@
-// import express, morgan, mongoose, models and passport locally
+// import express, morgan, mongoose, models, passport and cors locally
 const express = require('express');
   bodyParser = require('body-parser');
   morgan = require('morgan');
@@ -97,7 +97,8 @@ app.get('/movies/directors/:Name', passport.authenticate('jwt', { session: false
 });
 
 // allow new users to register
-app.post('/users', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.post('/users', (req, res) => {
+  let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
@@ -106,15 +107,15 @@ app.post('/users', passport.authenticate('jwt', { session: false }), (req, res) 
         Users
           .create({
             Username: req.body.Username,
-            Password: req.body.Password,
+            Password: hashedPassword,
             Email: req.body.Email,
             Birthday: req.body.Birthday
           })
           .then((user) =>{res.status(201).json(user) })
-        .catch((error) => {
-          console.error(error);
-          res.status(500).send('Error: ' + error);
-        })
+          .catch((error) => {
+            console.error(error);
+            res.status(500).send('Error: ' + error);
+          });
       }
     })
     .catch((error) => {
