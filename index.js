@@ -1,11 +1,12 @@
 // import express, morgan, mongoose, models and passport locally
 const express = require('express');
-  bodyParser = require("body-parser");
+  bodyParser = require('body-parser');
   morgan = require('morgan');
   mongoose = require('mongoose');
   Models = require('./models.js');
   passport = require('passport');
   require('./passport');
+  cors = require('cors');
 
 // define express and models in a variable
 const app = express();
@@ -17,6 +18,9 @@ mongoose.connect('mongodb://localhost:27017/myFlixDB', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
+// use cors
+app.use(cors());
   
 // use body parser
 app.use(bodyParser.json());
