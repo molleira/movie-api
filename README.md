@@ -5,7 +5,7 @@ This project is the server-side component for an application called “myFlix”
 ### About
 The API uses middleware modules, such as the *body-parser* package for reading data from requests and *morgan* for logging. The business logic was modeled with *Mongoose*. The information provided is in *JSON* format. It includes user authentication and authorization code, data validation logic and meets data security regulations.
 
-The REST API is hosted on *Heroku* and is accessed via commonly used HTTP methods like GET and POST. Similar methods (CRUD) will be used to retrieve data from your database and store that data in a non-relational way. The endpoints were tested using *Postman*.
+The REST API is hosted on *Heroku* and is accessed via commonly used *HTTP* methods like *GET* and *POST*. Similar methods (*CRUD*) will be used to retrieve data from your database and store that data in a non-relational way. The endpoints were tested using *Postman*.
 
 ### Development
 In the future I would like to improve the API addind more collections to offer more and better information.
